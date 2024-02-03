@@ -15,19 +15,6 @@ impl Model {
         }
     }
 
-    pub fn increment_score(&self) {
-        let mut x = self.score.write().unwrap();
-        *x += 1;
-        // Prevent integer overflow
-        if *x == std::usize::MAX {
-            *x = 0;
-        }
-    }
-
-    pub fn get_score(&self) -> usize {
-        *self.score.read().unwrap()
-    }
-
     pub fn get_comments(&self) -> std::sync::RwLockReadGuard<'_, Vec<String>> {
         self.comments.read().unwrap()
     }

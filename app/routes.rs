@@ -15,17 +15,24 @@ use tera::Context;
 
 pub fn build_routes() -> Router {
     Router::new()
-        .route("/", get(hello))
+        .route("/", get(home))
+        .route("/text", get(game))
         .route("/comments", post(comments))
         .with_state(Arc::new(model::Model::new()))
 }
 
 // Here go routes
 
-async fn hello(State(model): State<Arc<Model>>) -> Html<String> {
+async fn home(State(model): State<Arc<Model>>) -> Html<String> {
     views::render_template(
-        "pages/greet.html",
-        &context! { name => "World", score => &model.get_score(), comments => &*model.get_comments()},
+        "pages/home.html",
+        &context! { name => "World" },
+    )
+}
+
+async fn game(State(model): State<Arc<Model>>) -> Html<String> {
+    views::render_template(
+        "pages/text.html", &context!{ comments => &(*model.get_comments()) }
     )
 }
 
