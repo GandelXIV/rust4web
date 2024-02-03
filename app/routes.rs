@@ -17,13 +17,13 @@ pub fn build_routes() -> Router {
     Router::new()
         .route("/", get(home))
         .route("/text", get(game))
-        .route("/comments", post(comments))
+        .route("/api/comments", post(comments))
         .with_state(Arc::new(model::Model::new()))
 }
 
 // Here go routes
 
-async fn home(State(model): State<Arc<Model>>) -> Html<String> {
+async fn home() -> Html<String> {
     views::render_template(
         "pages/home.html",
         &context! { name => "World" },
