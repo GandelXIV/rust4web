@@ -16,7 +16,6 @@ use tera::Context;
 pub fn build_routes() -> Router {
     Router::new()
         .route("/", get(hello))
-        .route("/increment", post(increment))
         .route("/comments", post(comments))
         .with_state(Arc::new(model::Model::new()))
 }
@@ -42,13 +41,5 @@ async fn comments(State(model): State<Arc<Model>>, Form(data): Form<CommentData>
     views::render_template(
         "components/read_comments.html",
         &context! { comments => &*model.get_comments() },
-    )
-}
-
-async fn increment(State(model): State<Arc<Model>>) -> Html<String> {
-    model.increment_score();
-    views::render_template(
-        "components/counter.html",
-        &context! { score => &model.get_score() },
     )
 }

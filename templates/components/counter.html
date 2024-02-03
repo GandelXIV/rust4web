@@ -1,3 +1,3 @@
-<button hx-post="/increment" hx-swap="outerHTML">
-  Score: {{ score }}
-</button> 
+<div x-data="{ count: 0 }">
+    <button x-text="'Score: ' + count" x-on:click="count++"></button>
+</div>
