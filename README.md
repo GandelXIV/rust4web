@@ -1,6 +1,6 @@
 # Rust for web development
 A modern tech stack using the following technologies:
-- Rust -> programming language
+- Rust -> backend language
 - Axum -> web framework for Rust
 - Tera -> content templating
 - Nginx -> web/proxy server
