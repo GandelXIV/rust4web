@@ -1,6 +1,6 @@
 pub mod model;
 pub mod routes;
-pub mod views;
+pub mod view;
 
 #[tokio::main]
 async fn main() {
