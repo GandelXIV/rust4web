@@ -1,4 +1,4 @@
-<form  hx-on::after-request="this.reset()" hx-post="/api/comments" hx-target="#comments_bulk">
+<form hx-ext="reset-success" hx-post="/api/comments" hx-target="#comments_bulk">
   <input name="newcomment" type="text"> </input>
   <input type="submit" ></input>
 </form>
