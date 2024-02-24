@@ -128,6 +128,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "axum-htmx"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "40f7051fdc094b6e5ea06cab9bca4b198c54dee4472a9419155f0ff19f19901e"
+dependencies = [
+ "async-trait",
+ "axum-core 0.4.3",
+ "http 1.0.0",
+]
+
+[[package]]
 name = "backtrace"
 version = "0.3.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1385,6 +1396,7 @@ name = "trax"
 version = "0.2.0"
 dependencies = [
  "axum",
+ "axum-htmx",
  "lazy_static",
  "serde",
  "tera",

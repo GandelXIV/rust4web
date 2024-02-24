@@ -3,7 +3,7 @@ A modern tech stack using the following technologies:
 - Rust -> backend language
 - Axum -> web framework for Rust
 - Tera -> content templating
-- Nginx -> web/proxy server
+- Nginx -> web proxy and static file server
 - htmX -> backend - frontend communication
 - AlpineJS -> dynamic frontend
 
