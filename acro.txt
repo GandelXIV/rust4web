@@ -1,0 +1,9 @@
+PATXARAN
+P - Postgres
+A - Axum
+T - Tera
+X - htmX
+A - AlpineJS
+R - Rust
+A - and
+N - Nginx

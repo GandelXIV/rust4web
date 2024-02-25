@@ -6,6 +6,9 @@
     <br>
     <br> {% include "components/counter.html" %}
     <p></p>
-    <br> {% include "components/counter.html" %}
+    <br>
+    {% for i in [1,2,3,4,5] %}
+      <p> {% include "components/pop.html" %} </p>
+    {% endfor %}
   </div>  
 {% endblock %}
