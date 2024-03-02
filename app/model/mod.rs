@@ -1,21 +1,30 @@
-use std::sync::RwLock;
+use std::sync::Mutex;
+
+use self::db::{ChosenDB, DBInterface};
+mod db;
 
 pub struct Model {
-    comments: RwLock<Vec<String>>,
+    database: ChosenDB,
+    comment_cache: Mutex<Vec<String>>,
 }
 
 impl Model {
-    pub fn new() -> Self {
+    pub async fn new() -> Self {
+        let database = db::ChosenDB::init().await;
+        let comment_cache = Mutex::new(database.fetch_comment_contents().await);
         Self {
-            comments: RwLock::new(vec!["Amazing website!".to_string()]),
+            database,
+            comment_cache
         }
     }
 
-    pub fn get_comments(&self) -> std::sync::RwLockReadGuard<'_, Vec<String>> {
-        self.comments.read().unwrap()
+    pub async fn get_comments(&self) -> Vec<String> {
+        self.comment_cache.lock().unwrap().clone()
+        //self.database.fetch_comment_contents().await
     }
 
-    pub fn new_comment(&self, text: String) {
-        self.comments.write().unwrap().push(text);
+    pub async fn new_comment(&self, text: String) {
+        self.database.create_comment(&text).await;
+        self.comment_cache.lock().unwrap().push(text);
     }
 }

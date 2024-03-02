@@ -9,10 +9,10 @@ mod api_comments;
 mod home;
 mod text;
 
-pub fn build_routes() -> Router {
+pub async fn build_routes() -> Router {
     Router::new()
         .route("/", get(home::render))
         .route("/text", get(text::render))
         .route("/api/comments", post(api_comments::render))
-        .with_state(Arc::new(model::Model::new()))
+        .with_state(Arc::new(model::Model::new().await))
 }

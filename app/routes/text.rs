@@ -7,6 +7,6 @@ use tera::Context;
 pub async fn render(State(model): State<Arc<Model>>) -> Html<String> {
     view::render_template(
         "pages/text.html",
-        &context! { comments => &(*model.get_comments()) },
+        &context! { comments => &(model.get_comments().await) },
     )
 }
