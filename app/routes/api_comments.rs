@@ -15,6 +15,6 @@ pub async fn render(State(model): State<Arc<Model>>, Form(data): Form<Params>) -
     }
     view::render_template(
         "components/read_comments.html",
-        &context! { comments => &*model.get_comments().await },
+        &context! { comments => &model.get_comments().await },
     )
 }

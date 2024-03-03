@@ -10,9 +10,10 @@ mod home;
 mod text;
 
 pub async fn build_routes() -> Router {
+    let model = model::Model::new().await;
     Router::new()
         .route("/", get(home::render))
         .route("/text", get(text::render))
         .route("/api/comments", post(api_comments::render))
-        .with_state(Arc::new(model::Model::new().await))
+        .with_state(Arc::new(model))
 }

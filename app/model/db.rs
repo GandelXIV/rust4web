@@ -1,7 +1,4 @@
-use sqlx::{
-    postgres::{PgPoolOptions, PgRow},
-    PgPool, Row,
-};
+use sqlx::{postgres::PgPoolOptions, PgPool, Row};
 
 pub type ChosenDB = PostgresDB;
 
@@ -36,26 +33,18 @@ impl DBInterface for PostgresDB {
     }
 
     async fn fetch_comment_contents(&self) -> Vec<String> {
-        let row = sqlx::query(
-            r#"
-            SELECT content FROM comments;
-            "#,
-        )
-        .fetch_all(&self.pool)
-        .await
-        .unwrap();
+        let row = sqlx::query("SELECT content FROM comments;")
+            .fetch_all(&self.pool)
+            .await
+            .unwrap();
         row.iter().map(|r| r.get::<String, _>("content")).collect()
     }
 
     async fn create_comment(&self, content: &str) {
-        sqlx::query(
-            r#"
-            INSERT INTO comments(content) VALUES ($1);
-        "#,
-        )
-        .bind(content)
-        .execute(&self.pool)
-        .await
-        .unwrap();
+        sqlx::query("INSERT INTO comments(content) VALUES ($1);")
+            .bind(content)
+            .execute(&self.pool)
+            .await
+            .unwrap();
     }
 }

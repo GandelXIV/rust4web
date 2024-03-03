@@ -1,3 +1,5 @@
+use std::net::SocketAddr;
+
 pub mod model;
 pub mod routes;
 pub mod view;
@@ -7,9 +9,9 @@ async fn main() {
     // build our application with a single route
     let app = routes::build_routes().await.into_make_service();
 
-    // run it with hyper on localhost:3000
-    axum::Server::bind(&"0.0.0.0:8000".parse().unwrap())
-        .serve(app)
+    let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
+    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
+    axum::serve(listener, app)
         .await
         .unwrap();
 }

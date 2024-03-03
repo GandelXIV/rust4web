@@ -14,7 +14,7 @@ impl Model {
         let comment_cache = Mutex::new(database.fetch_comment_contents().await);
         Self {
             database,
-            comment_cache
+            comment_cache,
         }
     }
 
