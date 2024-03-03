@@ -5,7 +5,8 @@ use axum::Router;
 use std::sync::Arc;
 
 // routefiles
-mod api_comments;
+mod api_create_comment;
+mod api_read_comments;
 mod home;
 mod text;
 
@@ -14,6 +15,7 @@ pub async fn build_routes() -> Router {
     Router::new()
         .route("/", get(home::render))
         .route("/text", get(text::render))
-        .route("/api/comments", post(api_comments::render))
+        .route("/api/comments", get(api_read_comments::render))
+        .route("/api/comments", post(api_create_comment::render))
         .with_state(Arc::new(model))
 }

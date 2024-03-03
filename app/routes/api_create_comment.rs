@@ -1,8 +1,9 @@
-use crate::{model::Model, views};
-use askama::Template;
+use crate::model::Model;
 use axum::{extract::State, response::Html, Form};
 use serde::Deserialize;
 use std::sync::Arc;
+
+use super::api_read_comments;
 
 #[derive(Deserialize)]
 pub struct Params {
@@ -15,12 +16,5 @@ pub async fn render(State(model): State<Arc<Model>>, Form(data): Form<Params>) -
             model.new_comment(newcomment.clone()).await;
         }
     }
-
-    Html(
-        views::CommentShower {
-            comments: model.get_comments().await,
-        }
-        .render()
-        .unwrap(),
-    )
+    api_read_comments::render(State(model)).await
 }
