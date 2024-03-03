@@ -2,7 +2,7 @@ use std::net::SocketAddr;
 
 pub mod model;
 pub mod routes;
-pub mod view;
+pub mod views;
 
 #[tokio::main]
 async fn main() {
@@ -11,7 +11,5 @@ async fn main() {
 
     let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    axum::serve(listener, app)
-        .await
-        .unwrap();
+    axum::serve(listener, app).await.unwrap();
 }

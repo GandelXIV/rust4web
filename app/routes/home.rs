@@ -1,7 +1,8 @@
-use crate::{context, view};
+use crate::views;
+use askama::Template;
 use axum::response::Html;
-use tera::Context;
 
 pub async fn render() -> Html<String> {
-    view::render_template("pages/home.html", &context! { name => "World" })
+    let page = views::Home { name: "World" };
+    Html(page.render().unwrap())
 }
