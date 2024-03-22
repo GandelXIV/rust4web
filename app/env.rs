@@ -7,12 +7,10 @@ use dotenvy::{self};
 use lazy_static::lazy_static;
 
 // Loads variable from .env, then from local environment if not found
-fn fetch_var<T: From<String>>(name: &str) -> T {
+fn fetch_var(name: &str) -> String {
     println!(
         "Loaded enviroment from {}",
-        dotenvy::dotenv_override()
-            .unwrap_or("[local]".into())
-            .display()
+        dotenvy::dotenv().unwrap_or("[local]".into()).display()
     );
 
     match dotenvy::var(name) {
@@ -24,6 +22,9 @@ fn fetch_var<T: From<String>>(name: &str) -> T {
 }
 
 lazy_static! {
-    pub static ref DB_URL: String = fetch_var("DB_URL");
     pub static ref ENV_DEBUG: String = fetch_var("ENV_DEBUG");
+    pub static ref DB_URL: String = fetch_var("DB_URL");
+    pub static ref DB_MAX_CONNECTIONS: u32 = fetch_var("DB_MAX_CONNECTIONS")
+        .parse()
+        .expect("Invalid value for env var");
 }

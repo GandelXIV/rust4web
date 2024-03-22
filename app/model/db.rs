@@ -17,7 +17,7 @@ pub struct PostgresDB {
 impl DBInterface for PostgresDB {
     async fn init() -> Self {
         let pool = PgPoolOptions::new()
-            .max_connections(5)
+            .max_connections(*env::DB_MAX_CONNECTIONS)
             .connect(&env::DB_URL)
             .await
             .unwrap();
