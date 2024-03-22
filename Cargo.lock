@@ -1748,6 +1748,7 @@ dependencies = [
  "askama",
  "axum",
  "axum-htmx",
+ "dotenvy",
  "lazy_static",
  "serde",
  "sqlx",

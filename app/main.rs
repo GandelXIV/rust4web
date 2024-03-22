@@ -7,6 +7,8 @@ pub mod views;
 
 #[tokio::main]
 async fn main() {
+    println!("ENV_DEBUG = {}", env::ENV_DEBUG.as_str());
+
     // build our application with a single route
     let app = routes::build_routes().await.into_make_service();
 
