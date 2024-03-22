@@ -1,5 +1,7 @@
 use sqlx::{postgres::PgPoolOptions, PgPool, Row};
 
+use crate::env;
+
 pub type ChosenDB = PostgresDB;
 
 pub trait DBInterface {
@@ -16,7 +18,7 @@ impl DBInterface for PostgresDB {
     async fn init() -> Self {
         let pool = PgPoolOptions::new()
             .max_connections(5)
-            .connect("postgres://postgres:postgres@localhost/postgres")
+            .connect(&env::DB_URL)
             .await
             .unwrap();
         sqlx::query(

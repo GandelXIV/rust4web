@@ -1,5 +1,6 @@
 use std::net::SocketAddr;
 
+pub mod env;
 pub mod model;
 pub mod routes;
 pub mod views;
